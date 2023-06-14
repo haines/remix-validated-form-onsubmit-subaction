@@ -1,53 +1,21 @@
-# Welcome to Remix!
+```console
+$ npm install --force
 
-- [Remix Docs](https://remix.run/docs)
+$ npm run typecheck
 
-## Development
+app/routes/_index.tsx:39:7 - error TS2322: Type 'Validator<{ subaction: Subaction.FOO; foo: string; } | { bar: string; subaction: Subaction.BAR; }>' is not assignable to type 'Validator<{ subaction: Subaction.FOO; foo: string; }>'.
+  Type '{ subaction: Subaction.FOO; foo: string; } | { bar: string; subaction: Subaction.BAR; }' is not assignable to type '{ subaction: Subaction.FOO; foo: string; }'.
+    Property 'foo' is missing in type '{ bar: string; subaction: Subaction.BAR; }' but required in type '{ subaction: Subaction.FOO; foo: string; }'.
 
-From your terminal:
+39       validator={validator}
+         ~~~~~~~~~
 
-```sh
-npm run dev
-```
-
-This starts your app in development mode, rebuilding assets on file changes.
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
+  app/routes/_index.tsx:33:59
+    33   const handleSubmit = (data: { subaction: Subaction.FOO; foo: string }) => {
+                                                                 ~~~
+    'foo' is declared here.
+  node_modules/remix-validated-form/dist/index.d.ts:183:5
+    183     validator: Validator<DataType>;
+            ~~~~~~~~~
+    The expected type comes from property 'validator' which is declared here on type 'IntrinsicAttributes & { validator: Validator<{ subaction: Subaction.FOO; foo: string; }>; onSubmit?: ((data: { subaction: Subaction.FOO; foo: string; }, event: FormEvent<...>) => void | Promise<...>) | undefined; ... 5 more ...; disableFocusOnError?: boolean | undefined; } & Omit<...>'
 ```
